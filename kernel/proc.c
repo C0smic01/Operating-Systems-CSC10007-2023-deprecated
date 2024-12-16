@@ -132,7 +132,8 @@ found:
     return 0;
   }
 
-  if ((p->usyscall = (struct usyscall *)kalloc()) == 0) 
+  p->usyscall = (struct usyscall *)kalloc();
+  if (p->usyscall == 0) 
   {
     freeproc(p);
     release(&p->lock);
