@@ -60,9 +60,9 @@ void find(char *path, char *name)
         p = buf+strlen(buf);
         *p++ = '/';
 
-        while(read(fd, &de, sizeof(de)) == sizeof(de))
+        while(read(fd, &de, sizeof(de)) == sizeof(de)) // Check if read enough bytes to fill the struct, and read each directory entry
         {
-            if(de.inum == 0)
+            if(de.inum == 0) // If inum is 0, then the directory entry is not in use(deleted)
             {
                 continue;
             }  
@@ -71,9 +71,9 @@ void find(char *path, char *name)
                 continue;
             }
 
-            memmove(p, de.name, DIRSIZ);
+            memmove(p, de.name, DIRSIZ); 
             p[DIRSIZ] = 0;
-            if(stat(buf, &st) < 0)
+            if(stat(buf, &st) < 0) // Check if the file/directory exists
             {
                 printf("find: cannot stat %s\n", buf);
                 continue;
