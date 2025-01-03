@@ -4,6 +4,7 @@
 int main(void)
 {
     // p1 is for parent to child, p2 is for child to parent
+    // p1[0] is read end of the pipe, p1[1] is write end of the pipe
     int p1[2], p2[2];
     pipe(p1);
     pipe(p2);
