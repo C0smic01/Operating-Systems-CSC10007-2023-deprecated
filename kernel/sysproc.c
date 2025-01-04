@@ -75,12 +75,12 @@ int
 sys_pgaccess(void)
 {
   // lab pgtbl: your code here.
-  uint64 va, ua, bitmask = 0;
+  uint64 va, ra, bitmask = 0;
   int pgnum;
 
   argaddr(0, &va);
   argint(1, &pgnum);
-  argaddr(2, &ua);
+  argaddr(2, &ra);
 
   if (pgnum > 32) 
     return -1;
@@ -96,7 +96,7 @@ sys_pgaccess(void)
     }
   }
 
-  if (copyout(myproc()->pagetable, ua, (char*)&bitmask, sizeof(bitmask)) < 0)
+  if (copyout(myproc()->pagetable, ra, (char*)&bitmask, sizeof(bitmask)) < 0)
     return -1;
 
   return 0;
